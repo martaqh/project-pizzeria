@@ -63,6 +63,23 @@
     renderInMenu() {
       const thisProduct = this;
 
+      /* generate HTML based on template */
+
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+
+      /* create element using utils.createElementFromHTLM */
+
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+
+      /* fund menu container */
+
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+
+      /* add element to menu */
+
+      menuContainer.appendChild(thisProduct.element);
+
     }
   }
 
