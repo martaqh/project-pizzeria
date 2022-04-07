@@ -88,7 +88,7 @@
       const thisProduct = this;
 
       /* find the clickable trigger */
-      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
 
       /* START: add event listener to clickable trigger on event click */
 
@@ -98,10 +98,15 @@
 
         /* find active product */
 
+        const activeProduct = thisProduct.element.querySelector(classNames.menuProduct.wrapperActive);
+        console.log(activeProduct);
+
         /* if there is active product different than thisProduct.element, remove active class form it */
-
+        if ((activeProduct !== null) && (activeProduct !== thisProduct.element)) {
+          activeProduct.classList.remove('active');
+        }
         /* toggle active class on thisProduct.element */
-
+        thisProduct.element.classList.toggle('active');
       });
 
     }
