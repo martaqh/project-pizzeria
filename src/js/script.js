@@ -98,15 +98,15 @@
 
         /* find active product */
 
-        const activeProduct = thisProduct.element.querySelector(classNames.menuProduct.wrapperActive);
+        const activeProduct = thisProduct.element.querySelector('.product.active');
         console.log(activeProduct);
 
         /* if there is active product different than thisProduct.element, remove active class form it */
         if ((activeProduct !== null) && (activeProduct !== thisProduct.element)) {
-          activeProduct.classList.remove('active');
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
         }
         /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle('active');
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
 
     }
