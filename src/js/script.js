@@ -55,9 +55,13 @@
   class Product {
     constructor(id, data){
       const thisProduct = this;
+
       thisProduct.id = id;
       thisProduct.data = data;
+
       thisProduct.renderInMenu();
+      thisProduct.initAccordion();
+
       console.log('new Product:', thisProduct);
     }
     renderInMenu() {
@@ -75,10 +79,30 @@
 
       const menuContainer = document.querySelector(select.containerOf.menu);
 
-
       /* add element to menu */
 
       menuContainer.appendChild(thisProduct.element);
+    }
+
+    initAccordion(){
+      const thisProduct = this;
+
+      /* find the clickable trigger */
+      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
+
+      /* START: add event listener to clickable trigger on event click */
+
+      clickableTrigger.addEventListener('click', function(event) {
+        /* prevent default action for event */
+        event.preventDefault();
+
+        /* find active product */
+
+        /* if there is active product different than thisProduct.element, remove active class form it */
+
+        /* toggle active class on thisProduct.element */
+
+      });
 
     }
   }
