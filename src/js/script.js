@@ -98,7 +98,7 @@
 
         /* find active product */
 
-        const activeProduct = thisProduct.element.querySelector('.product.active');
+        const activeProduct = document.querySelector('.product.active');
         console.log(activeProduct);
 
         /* if there is active product different than thisProduct.element, remove active class form it */
