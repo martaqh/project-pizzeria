@@ -100,6 +100,7 @@
       console.log(thisProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       console.log(thisProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -168,8 +169,8 @@
 
           // is an option (optionId) within a given category (paramID) chosen in the form (formData)
 
-          
-          if (formData[paramId] && formData[paramId].includes(optionId)) { 
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if (optionSelected) { 
 
             // if option is chosen and not default -- add it's price to total
             
@@ -192,7 +193,31 @@
 
           }
 
+          // find an image of a specific ingredient based on it's class .paramId-optionId
+
+          const ingredientImage = thisProduct.imageWrapper.querySelector('.'+ paramId + '-' + optionId +'');
+          console.log(ingredientImage);
+
+          // if the ingredient has the image
+
+          if (ingredientImage) {
+
+            //if it's selected
+
+            if (optionSelected) {
+
+              // show it
+
+              ingredientImage.classList.add(classNames.menuProduct.imageVisible);
+              
+              // otherwise hide it
+
+            } else {          
+              ingredientImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
+        
       }
 
       // update calculated price in the HTML
