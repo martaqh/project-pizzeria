@@ -272,11 +272,11 @@
       if(thisWidget.value !== newValue && !isNaN(newValue) && newValue>=settings.amountWidget.defaultMin && newValue<=settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
         console.log(thisWidget.value);
-        thisWidget.announce();
+        
       }
-
+    
       thisWidget.input.value = thisWidget.value;
-      
+      thisWidget.announce();
     }
 
     initActions() {
