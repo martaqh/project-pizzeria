@@ -267,6 +267,8 @@
       const newValue = parseInt(value);
       console.log(newValue);
 
+      thisWidget.value = settings.amountWidget.defaultValue;
+
       /* TODO: Add validation */
 
       if(thisWidget.value !== newValue && !isNaN(newValue) && newValue>=settings.amountWidget.defaultMin && newValue<=settings.amountWidget.defaultMax) {
@@ -274,9 +276,9 @@
         console.log(thisWidget.value);
         
       }
-    
-      thisWidget.input.value = thisWidget.value;
       thisWidget.announce();
+      thisWidget.input.value = thisWidget.value;
+      
     }
 
     initActions() {
