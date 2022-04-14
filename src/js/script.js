@@ -58,6 +58,7 @@
 
       thisProduct.id = id;
       thisProduct.data = data;
+      thisProduct.dom = {};
 
       thisProduct.renderInMenu();
       thisProduct.getElements();
@@ -77,7 +78,7 @@
 
       /* create element using utils.createElementFromHTLM */
 
-      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      thisProduct.dom.element = utils.createDOMFromHTML(generatedHTML);
 
       /* fund menu container */
 
@@ -85,31 +86,31 @@
 
       /* add element to menu */
 
-      menuContainer.appendChild(thisProduct.element);
+      menuContainer.appendChild(thisProduct.dom.element);
     }
 
     getElements(){
       const thisProduct = this;
     
-      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      //console.log(thisProduct.accordionTrigger);
-      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      //console.log(thisProduct.form);
-      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      // console.log(thisProduct.formInputs);
-      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      //console.log(thisProduct.cartButton);
-      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
-      //console.log(thisProduct.priceElem);
-      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+      thisProduct.dom.accordionTrigger = thisProduct.dom.element.querySelector(select.menuProduct.clickable);
+      //console.log(thisProduct.dom.accordionTrigger);
+      thisProduct.dom.form = thisProduct.dom.element.querySelector(select.menuProduct.form);
+      //console.log(thisProduct.dom.form);
+      thisProduct.dom.formInputs = thisProduct.dom.form.querySelectorAll(select.all.formInputs);
+      // console.log(thisProduct.dom.formInputs);
+      thisProduct.dom.cartButton = thisProduct.dom.element.querySelector(select.menuProduct.cartButton);
+      //console.log(thisProduct.dom.cartButton);
+      thisProduct.dom.priceElem = thisProduct.dom.element.querySelector(select.menuProduct.priceElem);
+      //console.log(thisProduct.dom.priceElem);
+      thisProduct.dom.imageWrapper = thisProduct.dom.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.dom.amountWidgetElem = thisProduct.dom.element.querySelector(select.menuProduct.amountWidget);
 
     }
 
     initAccordion(){
       const thisProduct = this;
 
-      thisProduct.accordionTrigger.addEventListener('click', function(event) {
+      thisProduct.dom.accordionTrigger.addEventListener('click', function(event) {
         /* prevent default action for event */
         event.preventDefault();
 
@@ -118,12 +119,12 @@
         const activeProduct = document.querySelector('.product.active');
         //console.log(activeProduct);
 
-        /* if there is active product different than thisProduct.element, remove active class form it */
-        if ((activeProduct !== null) && (activeProduct !== thisProduct.element)) {
+        /* if there is active product different than thisProduct.dom.element, remove active class form it */
+        if ((activeProduct !== null) && (activeProduct !== thisProduct.dom.element)) {
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
         }
-        /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        /* toggle active class on thisProduct.dom.element */
+        thisProduct.dom.element.classList.toggle(classNames.menuProduct.wrapperActive);
       });
 
     }
@@ -131,18 +132,18 @@
       const thisProduct = this;
       //console.log('initOrderForm');
 
-      thisProduct.form.addEventListener('submit', function(event){
+      thisProduct.dom.form.addEventListener('submit', function(event){
         event.preventDefault();
         thisProduct.processOrder();
       });
       
-      for(let input of thisProduct.formInputs){
+      for(let input of thisProduct.dom.formInputs){
         input.addEventListener('change', function(){
           thisProduct.processOrder();
         });
       }
       
-      thisProduct.cartButton.addEventListener('click', function(event){
+      thisProduct.dom.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
       });
@@ -151,8 +152,8 @@
     initAmountWidget(){
       const thisProduct = this;
 
-      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidgetElem.addEventListener('update', function() {
+      thisProduct.amountWidget = new AmountWidget(thisProduct.dom.amountWidgetElem);
+      thisProduct.dom.amountWidgetElem.addEventListener('update', function() {
         thisProduct.processOrder();
       });
     }
@@ -161,7 +162,7 @@
       const thisProduct = this;
 
       // convert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
-      const formData = utils.serializeFormToObject(thisProduct.form);
+      const formData = utils.serializeFormToObject(thisProduct.dom.form);
       //console.log('formData', formData);
 
       // set price to default price
@@ -207,7 +208,7 @@
 
           // find an image of a specific ingredient based on it's class .paramId-optionId
 
-          const ingredientImage = thisProduct.imageWrapper.querySelector('.'+ paramId + '-' + optionId +'');
+          const ingredientImage = thisProduct.dom.imageWrapper.querySelector('.'+ paramId + '-' + optionId +'');
           //console.log(ingredientImage);
 
           // if the ingredient has the image
@@ -234,7 +235,7 @@
       // multiple price by amount
       price *=thisProduct.amountWidget.value;
       // update calculated price in the HTML
-      thisProduct.priceElem.innerHTML = price;
+      thisProduct.dom.priceElem.innerHTML = price;
     }
 
   }
@@ -302,7 +303,25 @@
     }
   }
 
-  
+  class Cart {
+    constructor(element){
+      const thisCart = this;
+
+      thisCart.products = [];
+
+      thisCart.getElements(element);
+
+      console.log('new Cart', thisCart);
+    }
+
+    getElements(element) {
+      const thisCart = this;
+
+      thisCart.dom = {};
+
+      thisCart.dom.wrapper = element;
+    }
+  }
 
   const app = {
     initMenu: function() {
@@ -318,6 +337,12 @@
       thisApp.data = dataSource;
     },
 
+    initCart: function(){
+      const thisApp = this;
+      const cartElement = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElement);
+    },
+
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -328,6 +353,7 @@
 
       thisApp.initData();
       thisApp.initMenu();
+      thisApp.initCart();
     },
   };
 
