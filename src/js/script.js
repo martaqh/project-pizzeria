@@ -295,15 +295,16 @@
       productSummary.amount = thisProduct.amountWidget.value;
       productSummary.priceSingle = thisProduct.priceSingle;
       productSummary.price = productSummary.priceSingle * productSummary.amount;
-      productSummary.params = {};
+      productSummary.params = thisProduct.prepareCartProductParams();
+      console.log(productSummary.params);
 
       return productSummary;
 
     }
 
-    prepareCartProductParams(){
+    prepareCartProductParams() {
       const thisProduct = this;
-      
+
       // convert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       
       const formData = utils.serializeFormToObject(thisProduct.dom.form);
@@ -317,10 +318,12 @@
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
         const param = thisProduct.data.params[paramId];
        
-        params[paramId] ={
+        params[paramId] = {
           label: param.label,
           options: {}
         };
+
+        console.log(params);
 
         // for every option in this category
         for(let optionId in param.options) {
@@ -330,16 +333,21 @@
       
           // is an option (optionId) within a given category (paramID) chosen in the form (formData)
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          console.log(optionSelected);
 
           if (optionSelected) { 
             params[paramId].options = processedOption;
+            console.log(params);
+            
           }
         }
       }
       return params;
-    }        
+    }
+           
   }
 
+  
   class AmountWidget{
     constructor(element){
       const thisWidget = this;
@@ -425,6 +433,7 @@
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
       console.log(thisCart.dom.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
 
     }
 
@@ -436,10 +445,21 @@
       });
     }
 
-    add(menuProduct){
-      //const thisCart = this;
+    add(){
+      const thisCart = this;
 
-      console.log('adding product:', menuProduct);
+      /* generate HTML based on template */
+
+      const generatedHTML = templates.cartProduct(Product.productSummary);
+      console.log(generatedHTML);
+
+      /* create element using utils.createElementFromHTLM */
+
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+      thisCart.dom.productList.appendChild(generatedDOM);
+
+
     }
 
   }
