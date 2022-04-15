@@ -272,7 +272,7 @@
 
       //NEW (cart):
 
-      thisProduct.priceSingle = price;
+      thisProduct.priceSingle = price / thisProduct.amountWidget.value;
 
       // update calculated price in the HTML
       thisProduct.dom.priceElem.innerHTML = price;
@@ -301,6 +301,43 @@
 
     }
 
+    prepareCartProductParams(){
+      const thisProduct = this;
+      
+      // convert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
+      
+      const formData = utils.serializeFormToObject(thisProduct.dom.form);
+      
+      const params = {};
+      
+      // for every category (param)...
+      
+      for(let paramId in thisProduct.data.params) {
+      
+        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
+        const param = thisProduct.data.params[paramId];
+       
+        params[paramId] ={
+          label: param.label,
+          options: {}
+        };
+
+        // for every option in this category
+        for(let optionId in param.options) {
+          // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
+          const processedOption = param.options[optionId];
+          console.log(processedOption);
+      
+          // is an option (optionId) within a given category (paramID) chosen in the form (formData)
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          if (optionSelected) { 
+            params[paramId].options = processedOption;
+          }
+        }
+      }
+      return params;
+    }        
   }
 
   class AmountWidget{
