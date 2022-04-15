@@ -450,7 +450,7 @@
 
       /* generate HTML based on template */
 
-      const generatedHTML = templates.cartProduct(Product.productSummary);
+      const generatedHTML = templates.cartProduct(thisCart.productSummary);
       console.log(generatedHTML);
 
       /* create element using utils.createElementFromHTLM */
