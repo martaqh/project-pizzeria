@@ -448,12 +448,12 @@
       });
     }
 
-    add(productSummaryInfo){
+    add(menuProduct){
       const thisCart = this;
 
       /* generate HTML based on template */
 
-      const generatedHTML = templates.cartProduct(productSummaryInfo);
+      const generatedHTML = templates.cartProduct(menuProduct);
       console.log(generatedHTML);
 
       /* create element using utils.createElementFromHTLM */
@@ -462,7 +462,32 @@
 
       thisCart.dom.productList.appendChild(generatedDOM);
 
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      console.log('thisCart.products:', thisCart.products);
 
+
+    }
+
+  }
+
+  class CartProduct {
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      thisCartProduct.id = menuProduct.id;
+      
+      thisCartProduct.getElements(element);
+      console.log('new Cart product', thisCartProduct);
+    }
+
+    getElements(element){
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.menuProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.menuProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.menuProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.menuProduct.remove);
     }
 
   }
