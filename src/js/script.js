@@ -180,7 +180,7 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.dom.amountWidgetElem);
-      thisProduct.dom.amountWidgetElem.addEventListener('update', function() {
+      thisProduct.dom.amountWidgetElem.addEventListener('updated', function() {
         thisProduct.processOrder();
       });
     }
@@ -276,6 +276,7 @@
       productSummary.id = thisProduct.id;
       productSummary.name = thisProduct.data.name;
       productSummary.amount = thisProduct.amountWidget.value;
+      console.log(productSummary.amount);
       productSummary.priceSingle = thisProduct.priceSingle;
       productSummary.price = productSummary.priceSingle * productSummary.amount;
       productSummary.params = thisProduct.prepareCartProductParams();
@@ -377,7 +378,9 @@
     announce(){
       const thisWidget = this;
 
-      const event = new Event('update');
+      const event = new CustomEvent('updated', {
+        bubbles: true
+      });
       thisWidget.element.dispatchEvent(event);
     }
   }
@@ -411,6 +414,10 @@
 
       thisCart.dom.toggleTrigger.addEventListener('click', function() {
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);       
+      });
+
+      thisCart.dom.productList.addEventListener('updated', function() {
+        thisCart.update();
       });
     }
 
@@ -481,12 +488,12 @@
 
     initAmountWidget(){
       const thisCartProduct = this;
-
+      
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-      thisCartProduct.dom.amountWidget.addEventListener('update', function() {
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function() {
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
-        thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
-        thisCartProduct.dom.price.innerHTML = thisCartProduct.price; //NIE DZIAŁA
+      // thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
+      // thisCartProduct.dom.price.innerHTML = thisCartProduct.price; //NIE DZIAŁA
       });
     }
 
