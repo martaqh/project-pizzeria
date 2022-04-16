@@ -448,12 +448,12 @@
       });
     }
 
-    add(){
+    add(productSummaryInfo){
       const thisCart = this;
 
       /* generate HTML based on template */
 
-      const generatedHTML = templates.cartProduct(thisCart.productSummary);
+      const generatedHTML = templates.cartProduct(productSummaryInfo);
       console.log(generatedHTML);
 
       /* create element using utils.createElementFromHTLM */
