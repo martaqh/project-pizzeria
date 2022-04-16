@@ -336,15 +336,18 @@
           console.log(optionSelected);
 
           if (optionSelected) { 
-            params[paramId].options = processedOption;
-            console.log(params);
-            
+            params[paramId].options = {
+              [optionId]: processedOption.label,
+            };
+            console.log(processedOption.label);
+            console.log(optionId);
           }
         }
       }
+      console.log(params);   
       return params;
     }
-           
+        
   }
 
   
