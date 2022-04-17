@@ -309,17 +309,21 @@
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', processedOption = { label: 'Olives', price: 2, default: true }
           const processedOption = param.options[optionId];
+          console.log(processedOption);
       
           // is an option (optionId) within a given category (paramID) chosen in the form (formData)
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          console.log(optionSelected);
 
           if (optionSelected) { 
-            params[paramId].options = {
-              [optionId]: processedOption.label,
-            };
+            params[paramId].options[optionId] = processedOption.label;
+          
+            console.log(params[paramId].options);
           }
+          
         }
-      }   
+      }
+      console.log(params);   
       return params;
     }
         
