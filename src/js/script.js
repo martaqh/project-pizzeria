@@ -515,10 +515,12 @@
         subtotalPrice: thisCart.subtotalPrice,
         totalNumber: thisCart.totalNumber,
         deliveryFee: thisCart.deliveryFee,
-        products: thisCart.orderedProductSummary,
+        products: [],
       };
 
-      console.log(payload.address);
+      for(let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
 
       const options = {
         method: 'POST',
