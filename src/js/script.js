@@ -418,7 +418,12 @@
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
       console.log(thisCart.dom.totalPrice);
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
+
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
+
+
     }
 
     initActions(){
@@ -440,7 +445,6 @@
         event.preventDefault();
         thisCart.sendOrder();
       });
-
     }
 
     add(menuProduct){
@@ -464,25 +468,25 @@
     update(){
       const thisCart = this;
 
-      let deliveryFee = settings.cart.defaultDeliveryFee;
-      let totalNumber = 0;
-      let subtotalPrice = 0;
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
 
       for (let cartProduct of thisCart.products) {
-        totalNumber += cartProduct.amount;
-        subtotalPrice += cartProduct.price;
+        thisCart.totalNumber += cartProduct.amount;
+        thisCart.subtotalPrice += cartProduct.price;
       }
-      console.log('totalNumber:', totalNumber);
-      console.log('subtotalPrice:', subtotalPrice);
-      if (totalNumber !== 0) {
-        thisCart.totalPrice = deliveryFee + subtotalPrice;
+      console.log('totalNumber:', thisCart.totalNumber);
+      console.log('subtotalPrice:', thisCart.subtotalPrice);
+      if (thisCart.totalNumber !== 0) {
+        thisCart.totalPrice = thisCart.deliveryFee + thisCart.subtotalPrice;
         console.log('totalPrice:', thisCart.totalPrice);
       } else {
         thisCart.totalPrice = 0;
-        deliveryFee = 0;
+        thisCart.deliveryFee = 0;
       }
-      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
+      thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
       for (let totalPricePresentation of thisCart.dom.totalPrice) {
         totalPricePresentation.innerHTML = thisCart.totalPrice;
       }
@@ -498,6 +502,40 @@
       thisCart.products.splice(indexOfProductToBeRemoved, 1);
       
       thisCart.update();
+    }
+
+    sendOrder(){
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.orders;
+
+      const payload = {
+        address: thisCart.dom.form.address.value,
+        phone: thisCart.dom.form.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        products: thisCart.orderedProductSummary,
+      };
+
+      console.log(payload.address);
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        }).then(function(parsedResponse){
+          console.log('parsed response:', parsedResponse);
+        });
+
+
     }
 
   }
@@ -528,6 +566,20 @@
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
       
+    }
+
+    getData() {
+      const thisCartProduct = this;
+      const orderedProductSummary = {};
+
+      orderedProductSummary.id = thisCartProduct.id;
+      orderedProductSummary.amount = thisCartProduct.amount;
+      orderedProductSummary.price = thisCartProduct.price;
+      orderedProductSummary.priceSingle = thisCartProduct.priceSingle;
+      orderedProductSummary.name = thisCartProduct.name;
+      orderedProductSummary.params = thisCartProduct.params;
+  
+      return orderedProductSummary;
     }
 
     initAmountWidget(){
