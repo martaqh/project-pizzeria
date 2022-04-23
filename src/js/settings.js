@@ -44,11 +44,10 @@ export const select = {
         hoursAmount: '.hours-amount',
         tables: '.floor-plan .table',
       },
-      nav: {
-        links: '.main-nav a',
-      },
     },
-  
+  },
+  nav: {
+    links: '.main-nav a',
   },
   // CODE ADDED START
   cart: {
