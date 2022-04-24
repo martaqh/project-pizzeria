@@ -22,7 +22,6 @@ class Booking {
 
     thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.widgets.amount.booking.peopleAmount);
     thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.widgets.amount.booking.hoursAmount);
-    console.log(thisBooking.dom.hoursAmount, thisBooking.dom.peopleAmount);
   }
 
   initWidgets(){

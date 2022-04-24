@@ -15,7 +15,6 @@ class CartProduct {
     thisCartProduct.getElements(element);
     thisCartProduct.initAmountWidget();
     thisCartProduct.initActions();
-    console.log('new Cart product', thisCartProduct);
   }
 
   getElements(element){
@@ -57,8 +56,7 @@ class CartProduct {
 
   remove(){
     const thisCartProduct = this;
-    console.log('remove method runs');
-
+    
     const event = new CustomEvent('remove', {
       bubbles: true,
       detail: {
