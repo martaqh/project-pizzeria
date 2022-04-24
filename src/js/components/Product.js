@@ -195,8 +195,10 @@ class Product {
     /* return to default settings of product after adding to cart */
 
     thisProduct.dom.priceElem.innerHTML = 0;
-    thisProduct.dom.amountInput = document.querySelector('.product__wrapper input.amount');
-    thisProduct.dom.amountInput.value = 0;
+    thisProduct.dom.amountInputs = document.querySelectorAll('.product__wrapper input.amount');
+    for (let amountInput of thisProduct.dom.amountInputs) {
+      amountInput.value = 0;
+    }
   }
 
   prepareCartProduct(){
