@@ -60,7 +60,8 @@ class Product {
 
       /* find active product */
 
-      const activeProduct = document.querySelector('.product.active');
+      //const activeProduct = document.querySelector('.product.active');
+      const activeProduct = document.querySelector(select.all.menuProductsActive);
 
       /* if there is active product different than thisProduct.dom.element, remove active class form it */
       if ((activeProduct !== null) && (activeProduct !== thisProduct.dom.element)) {
