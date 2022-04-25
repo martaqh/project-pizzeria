@@ -194,10 +194,10 @@ class Product {
 
     /* return to default settings of product after adding to cart */
 
-    thisProduct.dom.priceElem.innerHTML = 0;
+    thisProduct.dom.priceElem.innerHTML = thisProduct.priceSingle;
     thisProduct.dom.amountInputs = document.querySelectorAll('.product__wrapper input.amount');
     for (let amountInput of thisProduct.dom.amountInputs) {
-      amountInput.value = 0;
+      amountInput.value = 1;
     }
   }
 
