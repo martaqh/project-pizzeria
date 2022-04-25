@@ -50,7 +50,18 @@ class Cart {
       event.preventDefault();
       thisCart.validateForm();
       thisCart.sendOrder();
+
       thisCart.cleanCart();    
+
+      thisCart.cartProductsWrapper = document.querySelector('ul.cart__order-summary');
+      thisCart.cartProductsWrapper.innerHTML = '';
+
+      thisCart.dom.totalNumber.innerHTML = 0;
+      thisCart.dom.deliveryFee.innerHTML = 0;
+      thisCart.dom.subtotalPrice.innerHTML = 0;
+      for (let totalPriceHolder of thisCart.dom.totalPrice) {
+        totalPriceHolder.innerHTML = 0;
+      }
     });
   }
 
@@ -131,11 +142,6 @@ class Cart {
       thisCart.dom.phone.classList.add('error');
       alert('Please enter a correct number');
     }
-
-
-    
-
-
 
   }
 
