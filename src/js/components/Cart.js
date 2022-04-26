@@ -138,10 +138,16 @@ class Cart {
   validateForm(){
     const thisCart = this;
 
-    if (thisCart.dom.phone.value.length < 9) {
+    if (thisCart.dom.phone.value.length >0 && thisCart.dom.phone.value.length < 9) {
       thisCart.dom.phone.classList.add('error');
-      alert('Please enter a correct number');
+      document.getElementById('error-phone').innerHTML = 'Please enter correct phone number';
     }
+
+    if (thisCart.dom.address.value.length > 0 && thisCart.dom.address.value.length < 5) {
+      thisCart.dom.address.classList.add('error');
+      document.getElementById('error-address').innerHTML = 'Please enter existing address';
+    }
+
 
   }
 
