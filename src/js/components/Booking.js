@@ -196,10 +196,6 @@ class Booking {
         
       }
     }
-    console.log(thisBooking.starters);
-    /*for(let prod of thisCart.products) {
-      payload.products.push(prod.getData());
-    } */
 
     const options = {
       method: 'POST',
@@ -215,7 +211,9 @@ class Booking {
       }).then(function(parsedResponse){
         console.log('parsed response:', parsedResponse);
       });
-
+    
+    thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
+    
 
   }
 
