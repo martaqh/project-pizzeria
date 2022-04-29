@@ -9,7 +9,7 @@ class Booking {
   constructor(element) {
     const thisBooking = this;
 
-    thisBooking.tableSelected = [];
+    thisBooking.tableSelected = null;
     
     thisBooking.render(element);
     thisBooking.initWidgets();
@@ -173,6 +173,44 @@ class Booking {
     }
   }
 
+  sendBooking(){
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const payload = {
+      date: thisBooking.datePickerWidget.value,
+      hour: thisBooking.hourPickerWidget.value,
+      table: thisBooking.tableSelected,
+      duration: parseInt(thisBooking.dom.duration.value),
+      ppl: parseInt(thisBooking.dom.ppl.value),
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address:thisBooking.dom.address.value,
+    };
+    console.log(payload);
+
+    /*for(let prod of thisCart.products) {
+      payload.products.push(prod.getData());
+    } */
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsed response:', parsedResponse);
+      });
+
+
+  }
+
 
   render(element){
     const thisBooking = this;
@@ -190,6 +228,10 @@ class Booking {
     thisBooking.dom.hourPickerWrapper = thisBooking.dom.wrapper.querySelector(select.widgets.amount.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.widgets.amount.booking.tables);
     thisBooking.dom.tablesWrapper = thisBooking.dom.wrapper.querySelector('.floor-plan');
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector('input[name="phone"]');
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector('input[name="address"]');
+    thisBooking.dom.duration = thisBooking.dom.wrapper.querySelector('.hours-amount input');
+    thisBooking.dom.ppl = thisBooking.dom.wrapper.querySelector('.people-amount input');
   }
 
   initWidgets(){
@@ -211,6 +253,10 @@ class Booking {
 
     thisBooking.dom.tablesWrapper.addEventListener('click', function(event){
       thisBooking.initTables(event);
+    });
+
+    thisBooking.dom.wrapper.addEventListener('submit', function(){
+      thisBooking.sendBooking();
     });
   }
 
