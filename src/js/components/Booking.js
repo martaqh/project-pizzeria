@@ -212,8 +212,8 @@ class Booking {
         console.log('parsed response:', parsedResponse);
       });
     
-    thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
-    
+    thisBooking.makeBooked(payload.date, payload.hour, payload.duration, parseInt(payload.table));
+    console.log(thisBooking.booked);
 
   }
 
