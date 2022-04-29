@@ -173,6 +173,11 @@
       }
   
     }
+    &.selected {
+      cursor: pointer;
+      background: $color-selected;
+    }
+
   }
   
   [data-table="1"] {
