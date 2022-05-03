@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pizzeria</title>
+  <link rel="stylesheet" href="/path/to/flickity.css" media="screen">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
@@ -88,34 +90,82 @@
               tue-sun, 12pm - 12am
             </p>
           </div>
+
+          <section class="recomendations container">
+            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+              <div class="carousel-cell">
+                <div class="slide-img">
+                  <img src="https://i.postimg.cc/2SvVyt1q/pizza-3.jpg" alt="recomendation">
+                </div>
+                <div class="slide-text">
+                  <p>Lorem pizzum z oliwkami</p>
+                </div>
+              </div>
+              <div class="carousel-cell">
+                <img src="https://i.postimg.cc/2SvVyt1q/pizza-3.jpg" alt="recomendation">
+                <div class="slide-text">
+                  <p>Pomodorum kalafiorum</p>
+                </div>  
+              </div>
+              <div class="carousel-cell">
+                <img src="https://i.postimg.cc/2SvVyt1q/pizza-3.jpg" alt="recomendation">
+                <div class="slide-text">
+                  <p>Serum rerum</p>
+                </div> 
+              </div>
+            </div>
+          </section>
+          <section class="gallery">
+            <div class="gallery-row">
+              <div class="gallery-item img1">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+              <div class="gallery-item img2">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+              <div class="gallery-item img3">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-row">
+              <div class="gallery-item img4">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+              <div class="gallery-item img5">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+              <div class="gallery-item img6">
+                <div class="icon-wrapper">
+                  <i class="fas fa-heart"></i>
+                  <i class="fas fa-share-alt"></i>
+                </div>
+              </div>
+            </div>
+            <a>View more on Instagram</a>
+          </section>
         </div>
-    <section class="recomendations">
-    </section>
-    <section class="gallery">
-      <div class="gallery-row">
-        <div class="gallery-item">
         </div>
-        <div class="gallery-item">
-        </div>
-        <div class="gallery-item">
-        </div>
-      </div>
-      <div class="gallery-row">
-        <div class="gallery-item">
-        </div>
-        <div class="gallery-item">
-        </div>
-        <div class="gallery-item">
-        </div>
-      </div>
-    </section>
-      </div>
-    </section>
-    <section id="order">
-      <div id="product-list" class="product-list container"></div>
-    </section>
-    <section id="booking">
-      <div class="booking-wrapper container"></div>
+        </section>
+      <section id="order">
+        <div id="product-list" class="product-list container"></div>
+      </section>
+      <section id="booking">
+        <div class="booking-wrapper container"></div>
     </section>
   </div>
 
@@ -293,6 +343,8 @@
      </form>
    </div>
  </script>
+ <script src="/path/to/flickity.pkgd.min.js"></script>
+ <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
  <script src="vendor/range-slider.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
