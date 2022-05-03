@@ -182,12 +182,30 @@
 }
 
 .recomendations {
+  display: flex;
   margin-top: 50px;
+  padding: 0;
+}
+
+.main-carousel {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .carousel-cell {
-  display: inline-flex;
+  display: flex;
   height: 150px;
+  width: 100%
+}
+
+.slide-img {
+  width: 40%;
+}
+
+.slide-text {
+  width: 60%;
 }
 
 .slide-img img {
@@ -198,4 +216,8 @@
 .slide-text p {
   padding: 10px;
   margin-left: 10px;
+  width: 100%
+}
+.flickity-button {
+  visibility: hidden;
 }
