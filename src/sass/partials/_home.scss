@@ -197,7 +197,7 @@
 .carousel-cell {
   display: flex;
   height: 150px;
-  width: 100%
+  width: 100%;
 }
 
 .slide-img {
@@ -216,8 +216,9 @@
 .slide-text p {
   padding: 10px;
   margin-left: 10px;
-  width: 100%
+  width: 100%;
 }
+
 .flickity-button {
   visibility: hidden;
 }

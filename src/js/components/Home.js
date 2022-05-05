@@ -11,6 +11,7 @@ class Home {
   render(element){
     const thisHome = this;
     const generatedHTML = templates.homePage();
+    console.log(generatedHTML);
 
     thisHome.dom = {};
     thisHome.dom.wrapper = element;
