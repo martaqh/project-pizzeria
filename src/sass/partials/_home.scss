@@ -207,6 +207,9 @@
 
 .slide-text {
   width: 60%;
+  padding: 10px;
+  margin-left: 10px;
+  
 }
 
 .slide-img img {
@@ -214,12 +217,18 @@
   height: 100%;
 }
 
-.slide-text p {
-  padding: 10px;
-  margin-left: 10px;
+.opinion-text  {
   width: 100%;
+}
+
+.opinion-author {
+  font-style: italic;
 }
 
 .flickity-button {
   visibility: hidden;
+}
+
+.insta {
+  color:$color-main;
 }
