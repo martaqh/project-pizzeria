@@ -21,8 +21,6 @@ class Booking {
     const thisBooking = this;
     const startDateParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePickerWidget.minDate);
     const endDateParam = settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePickerWidget.maxDate);
-    console.log(startDateParam);
-    console.log(endDateParam);
 
     const params = {
       booking: [
@@ -39,7 +37,6 @@ class Booking {
         endDateParam,
       ],
     };
-    console.log(params);
 
     const urls = {
       booking:       settings.db.url + '/' + settings.db.booking 
@@ -49,7 +46,6 @@ class Booking {
       eventsRepeat:  settings.db.url + '/' + settings.db.event   
                                      + '?' + params.eventsRepeat.join('&'),
     };
-    //console.log(urls);
   
     Promise.all([
       fetch(urls.booking),
@@ -67,9 +63,6 @@ class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        //console.log(bookings);
-        //console.log(eventsCurrent);
-        //console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   
@@ -97,7 +90,6 @@ class Booking {
         }       
       }   
     }
-    //console.log(thisBooking.booked);
     thisBooking.updateDOM();
   }
 
@@ -188,7 +180,6 @@ class Booking {
       phone: thisBooking.dom.phone.value,
       address:thisBooking.dom.address.value,
     };
-    console.log(payload);
 
     for (let starter of thisBooking.dom.starters) {
       if (starter.checked == true && !thisBooking.starters.includes(starter.value)) {
@@ -213,7 +204,6 @@ class Booking {
       });
     
     thisBooking.makeBooked(payload.date, payload.hour, payload.duration, parseInt(payload.table));
-    console.log(thisBooking.booked);
 
   }
 
@@ -239,7 +229,6 @@ class Booking {
     thisBooking.dom.duration = thisBooking.dom.wrapper.querySelector('.hours-amount input');
     thisBooking.dom.ppl = thisBooking.dom.wrapper.querySelector('.people-amount input');
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll('input[name="starter"]');
-    console.log(thisBooking.dom.starters);
   }
 
   initWidgets(){

@@ -48,7 +48,6 @@ class Product {
     thisProduct.dom.priceElem = thisProduct.dom.element.querySelector(select.menuProduct.priceElem);
     thisProduct.dom.imageWrapper = thisProduct.dom.element.querySelector(select.menuProduct.imageWrapper);
     thisProduct.dom.amountWidgetElem = thisProduct.dom.element.querySelector(select.menuProduct.amountWidget);
-
   }
 
   initAccordion(){
@@ -197,8 +196,10 @@ class Product {
 
     thisProduct.dom.priceElem.innerHTML = thisProduct.priceSingle;
     thisProduct.dom.amountInputs = document.querySelectorAll('.product__wrapper input.amount');
+
     for (let amountInput of thisProduct.dom.amountInputs) {
       amountInput.value = 1;
+      thisProduct.dom.amountInputs.innerHTML = amountInput.value;
     }
   }
 
