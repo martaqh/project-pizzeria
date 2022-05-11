@@ -10,7 +10,8 @@ const app = {
     const thisApp = this;
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
-    thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.navLinks = document.querySelectorAll('.main-nav a, .subpage-link');
+    console.log(thisApp.navLinks);
     
     const idFromHash = window.location.hash.replace('#/', '');
     
@@ -124,9 +125,10 @@ const app = {
 
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initHome();
     thisApp.initPages();
     thisApp.initBooking();
-    thisApp.initHome();
+    
   },
 };
 
