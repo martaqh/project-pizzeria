@@ -5,3 +5,10 @@ While ordering you can customize selected products and add them into cart.
 The booking feature uses API to store reservations' info on server and display available tables accordingly.
 
 You can see and try it here: https://secret-fjord-56093.herokuapp.com/
+
+You can also see the project at http://localhost:3000/ using:
+
+```
+npm install
+npm run watch
+```
